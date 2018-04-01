@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/general"
+        android:title="GENERAL" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_message_black_24dp"
+        android:title="Notifiception" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_battery_unknown_black_24dp"
+        android:title="Battery Reminder" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_do_not_disturb_off_black_24dp"
+        android:title="Turn Off Silent" />
+
+    <item android:id="@+id/nav_account"
+        android:title="SUPPORT" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_attach_money_black_24dp"
+        android:title="Donate" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_contact_mail_black_24dp"
+        android:title="Mail Us" />
+
+    <item android:id="@+id/nav_account"
+        android:icon="@mipmap/ic_person_black_24dp"
+        android:title="About" />
+
+</menu>
