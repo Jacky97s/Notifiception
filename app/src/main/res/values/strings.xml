@@ -2,4 +2,13 @@
     <string name="app_name">Notifiception</string>
     <string name="open">Open</string>
     <string name="close">Close</string>
+    <string name="notifiception">Notifiception</string>
+    <string name="general">GENERAL</string>
+    <string name="battery_reminder">Battery Reminder</string>
+    <string name="turn_off_silent">Turn Off Silent</string>
+    <string name="emergency_contacts">Emergency Contacts</string>
+    <string name="support">SUPPORT</string>
+    <string name="donate">Donate</string>
+    <string name="mail_us">Mail Us</string>
+    <string name="about">About</string>
 </resources>
