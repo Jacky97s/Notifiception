@@ -15,7 +15,7 @@
                 android:title="@string/turn_off_silent" />
 
             <item android:id="@+id/pg_police"
-                android:icon="@mipmap/ic_do_not_disturb_off_black_24dp"
+                android:icon="@mipmap/ic_contact_phone_black_24dp"
                 android:title="@string/emergency_contacts" />
         </menu>
     </item>
@@ -23,8 +23,8 @@
     <item android:title="@string/support">
         <menu>
             <item android:id="@+id/pg_donate"
-            android:icon="@mipmap/ic_attach_money_black_24dp"
-            android:title="@string/donate" />
+                android:icon="@mipmap/ic_attach_money_black_24dp"
+                android:title="@string/donate" />
 
             <item android:id="@+id/pg_mail"
                 android:icon="@mipmap/ic_contact_mail_black_24dp"
