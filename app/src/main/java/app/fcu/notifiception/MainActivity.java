@@ -78,14 +78,6 @@ public class MainActivity extends AppCompatActivity {
                         drawerLayout.closeDrawers();
                         break;
 
-                    case R.id.pg_donate:
-                        fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new Donate());
-                        fragmentTransaction.commit();
-                        getSupportActionBar().setTitle("Donation");
-                        drawerLayout.closeDrawers();
-                        break;
-
                     case R.id.pg_mail:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
                         fragmentTransaction.replace(R.id.main_container, new Mail());
