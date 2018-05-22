@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 /**
@@ -23,7 +25,13 @@ public class Notifiception extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_notifiception, container, false);
+
+        View v = inflater.inflate(R.layout.fragment_notifiception, container, false);
+        Spinner spinner = (Spinner) v.findViewById(R.id.timeSpinner);
+        ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner, android.R.layout.simple_spinner_item );
+        nAdapter.setDropDownViewResource(R.layout.spinner_style);
+        spinner.setAdapter(nAdapter);
+        return v;
     }
 
 }
