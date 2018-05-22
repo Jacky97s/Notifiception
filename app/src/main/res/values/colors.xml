@@ -7,5 +7,6 @@
     <color name="background_material_light">#3b4b6b</color>
     <color name="colorBackground">#ffffff</color>
     <color name="text_color_secondary">#ffffff</color>
+    <color name="text_color_secondary_dark">#ffffff</color>
     <color name="primary_text_default_material_dark">#ff6363</color>
 </resources>

@@ -16,7 +16,7 @@
 
             <item android:id="@+id/pg_police"
                 android:icon="@mipmap/ic_contact_phone_black_24dp"
-                android:title="@string/emergency_contacts"/>
+                android:title="@string/emergency_contacts" />
         </menu>
     </item>
 
