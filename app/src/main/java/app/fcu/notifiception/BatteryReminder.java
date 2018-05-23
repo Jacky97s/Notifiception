@@ -23,27 +23,27 @@ public class BatteryReminder extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        SeekBar seekBar = container.findViewById(R.id.br_seekBar);
-        final TextView seekValue = container.findViewById(R.id.seekValue);
+        View v = inflater.inflate(R.layout.fragment_battery_reminder, container, false);
+        SeekBar seekBar = v.findViewById(R.id.br_seekBar);
+        final TextView seekValue = v.findViewById(R.id.seekValue);
 
-//        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-//            @Override
-//            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-//
-//            }
-//
-//            @Override
-//            public void onStartTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//
-//            @Override
-//            public void onStopTrackingTouch(SeekBar seekBar) {
-//
-//            }
-//        });
+        seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                seekValue.setText(String.valueOf(progress) + "%");
+            }
 
-        return inflater.inflate(R.layout.fragment_battery_reminder, container, false);
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+        return v;
     }
-
 }
