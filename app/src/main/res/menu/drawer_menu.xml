@@ -22,10 +22,6 @@
 
     <item android:title="@string/support">
         <menu>
-            <item android:id="@+id/pg_donate"
-                android:icon="@mipmap/ic_attach_money_black_24dp"
-                android:title="@string/donate" />
-
             <item android:id="@+id/pg_mail"
                 android:icon="@mipmap/ic_contact_mail_black_24dp"
                 android:title="@string/mail_us" />
