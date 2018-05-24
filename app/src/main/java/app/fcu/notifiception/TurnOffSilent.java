@@ -6,6 +6,8 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
 
 
 /**
@@ -22,8 +24,14 @@ public class TurnOffSilent extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_turn_off_silent, container, false);
+
+        View d = inflater.inflate(R.layout.fragment_turn_off_silent, container, false);
+        Spinner spinner = (Spinner) d.findViewById(R.id.durationSpinner);
+        ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner, android.R.layout.simple_spinner_item );
+        nAdapter.setDropDownViewResource(R.layout.spinner_style);
+        spinner.setAdapter(nAdapter);
+        return d;
+
     }
 
 }

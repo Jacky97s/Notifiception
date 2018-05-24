@@ -35,7 +35,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="0.9"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Notificeotion"
+                    android:text="Notifiception"
                     android:background="@android:color/white"
                     android:padding="3.8dp"/>
 
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:textColor="@color/colorPrimaryDark"
-                    android:text="Durtion"
+                    android:text="Duration"
                     android:background="@android:color/white"
                     android:padding="3.8dp"/>
 
