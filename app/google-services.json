@@ -1,0 +1,59 @@
+{
+  "project_info": {
+    "project_number": "3311037922",
+    "firebase_url": "https://psd-1072.firebaseio.com",
+    "project_id": "psd-1072",
+    "storage_bucket": "psd-1072.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:3311037922:android:2eb3ae431ac8f3c5",
+        "android_client_info": {
+          "package_name": "app.fcu.notifiception"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "3311037922-kbjf1gvfg34fbsii16nibjacm1nl2p29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "app.fcu.notifiception",
+            "certificate_hash": "8653e18e566ab286e9af4574554a728b60a9c9e0"
+          }
+        },
+        {
+          "client_id": "3311037922-a05jlqffbbgp8v1lodv89tvb7b9koqja.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "3311037922-a05jlqffbbgp8v1lodv89tvb7b9koqja.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdguqCOJtHJzmi2HD8YTVWjDDjopqVU0Q"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "3311037922-a05jlqffbbgp8v1lodv89tvb7b9koqja.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -5,10 +5,46 @@
     android:layout_height="match_parent"
     tools:context=".PoliceData">
 
-    <!-- TODO: Update blank fragment layout -->
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/List_view"/>
+        android:orientation="vertical">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="@android:color/white"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:text="Name" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:text="Address" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="0.33"
+                android:gravity="center"
+                android:text="Contact" />
+
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/listview_psd"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbarSize="50dp"
+            />
+
+    </LinearLayout>
 </FrameLayout>
