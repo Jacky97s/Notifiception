@@ -14,22 +14,19 @@
             android:layout_width="wrap_content"
             android:layout_weight="0.33"
             android:layout_height="match_parent"
-            android:id="@+id/tv_name"
-            android:gravity="center"/>
+            android:id="@+id/tv_name"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_weight="0.33"
             android:layout_height="match_parent"
-            android:id="@+id/tv_address"
-            android:gravity="center"/>
+            android:id="@+id/tv_address"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_weight="0.33"
             android:layout_height="match_parent"
-            android:id="@+id/tv_contact"
-            android:gravity="center"/>
+            android:id="@+id/tv_contact"/>
     </LinearLayout>
 
 </LinearLayout>

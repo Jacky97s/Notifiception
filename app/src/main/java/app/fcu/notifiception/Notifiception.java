@@ -27,8 +27,9 @@ public class Notifiception extends Fragment {
         // Inflate the layout for this fragment
 
         View v = inflater.inflate(R.layout.fragment_notifiception, container, false);
-        Spinner spinner = (Spinner) v.findViewById(R.id.timeSpinner);
-        ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner, android.R.layout.simple_spinner_item );
+        Spinner spinner = v.findViewById(R.id.timeSpinner);
+        ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner,
+                R.layout.spinner_text);
         nAdapter.setDropDownViewResource(R.layout.spinner_style);
         spinner.setAdapter(nAdapter);
         return v;

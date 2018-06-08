@@ -4,7 +4,7 @@
         <menu>
             <item android:id="@+id/pg_noti"
                 android:icon="@mipmap/ic_message_black_24dp"
-                android:title="@string/notifiception" />
+                android:title="@string/notifiception"/>
 
             <item android:id="@+id/pg_br"
                 android:icon="@mipmap/ic_battery_unknown_black_24dp"

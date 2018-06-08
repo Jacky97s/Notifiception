@@ -11,9 +11,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.support.v7.widget.Toolbar;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     Toolbar toolbar;
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.pg_tos:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilent());
+                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilentt());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Turn Off Silent");
                         drawerLayout.closeDrawers();
