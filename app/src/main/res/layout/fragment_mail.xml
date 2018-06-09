@@ -22,24 +22,24 @@
             android:paddingTop="10dp"
             android:textSize="15dp"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@android:color/white">
+        <!--<LinearLayout-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:orientation="horizontal"-->
+            <!--android:background="@android:color/white">-->
 
-            <EditText
-                android:id="@+id/emailText"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:textColor="@android:color/black"
-                android:textSize="15sp"
-                android:hint="Email"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp" />
+            <!--<EditText-->
+                <!--android:id="@+id/et_email"-->
+                <!--android:layout_width="0dp"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_weight="1"-->
+                <!--android:textColor="@android:color/black"-->
+                <!--android:textSize="15sp"-->
+                <!--android:hint="Email"-->
+                <!--android:layout_marginStart="10dp"-->
+                <!--android:layout_marginLeft="10dp" />-->
 
-        </LinearLayout>
+        <!--</LinearLayout>-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             android:layout_marginBottom="30dp">
 
             <EditText
-                android:id="@+id/inputMsg"
+                android:id="@+id/et_msg"
                 android:layout_width="0dp"
                 android:layout_height="120dp"
                 android:hint="Message"
@@ -81,35 +81,37 @@
             android:background="@android:color/white">
 
             <EditText
-                android:id="@+id/nameText"
+                android:id="@+id/et_name"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="9"
                 android:textSize="15sp"
-                android:textColor="@android:color/white"
+                android:textColor="@color/colorPrimaryDark"
                 android:hint="Name"
                 android:layout_marginHorizontal="10dp"/>
 
         </LinearLayout>
 
-        <Button
-            android:id="@+id/screenshot"
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:textColor="@color/colorPrimary"
-            android:text="Attatch Screenshot"
-            android:background="@android:color/white"
-            android:layout_marginTop="2dp"/>
+        <!--<Button-->
+            <!--android:id="@+id/screenshot"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:textColor="@color/colorPrimary"-->
+            <!--android:text="Attatch Screenshot"-->
+            <!--android:background="@android:color/white"-->
+            <!--android:layout_marginTop="2dp"/>-->
 
 
         <Button
-            android:id="@+id/feedback"
+            android:id="@+id/btn_feedback"
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textColor="@color/colorPrimary"
             android:text="Send Feedback"
             android:background="@android:color/white"
-            android:layout_marginTop="40dp"/>
+            android:layout_marginTop="40dp"
+            android:elevation="10dp"
+            android:padding="10dp"/>
 
         </LinearLayout>
 

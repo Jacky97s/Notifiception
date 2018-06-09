@@ -32,11 +32,10 @@
                 android:id="@+id/br_seekBar"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_weight="0.85"
+                android:layout_weight="0.9"
                 android:max="100"
                 android:progress="80"
                 android:maxHeight="6dp"
-                android:layout_marginRight="5dp"
                 android:thumbTint="@color/colorPrimary"
                 android:progressDrawable="@drawable/seek_bar"/>
 
@@ -45,7 +44,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:text=""
-                android:layout_weight="0.15"/>
+                android:layout_weight="0.1"
+                android:gravity="center"/>
 
         </LinearLayout>
 
