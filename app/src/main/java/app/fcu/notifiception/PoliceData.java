@@ -1,14 +1,16 @@
 package app.fcu.notifiception;
 
 
-import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
+import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.firebase.database.DataSnapshot;
@@ -17,6 +19,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,6 +34,8 @@ import java.util.List;
 public class PoliceData extends Fragment {
 
     public static final int LIST_DATA = 1;
+    private String lat;
+    private String lng;
 
     public PoliceData() {
         // Required empty public constructor
@@ -56,6 +65,7 @@ public class PoliceData extends Fragment {
                     PoliceArrayAdapter adapter = new PoliceArrayAdapter(getActivity(), psdlist);
                     ListView lv = getView().findViewById(R.id.listview_psd);
                     lv.setAdapter(adapter);
+                    lv.setOnItemClickListener(itemClick);
                 }
             }
 
@@ -72,5 +82,68 @@ public class PoliceData extends Fragment {
         View v = inflater.inflate(R.layout.fragment_police_data, container, false);
         getDataFromFirebase();
         return v;
+    }
+
+    AdapterView.OnItemClickListener itemClick = new AdapterView.OnItemClickListener() {
+        @Override
+        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+            PoliceStationData policeStationData = (PoliceStationData) parent.getItemAtPosition(position);
+            new getCoordinates().execute(policeStationData.getAddress().replace(" ", "+"));
+        }
+    };
+
+    private class getCoordinates extends AsyncTask<String, Void, String> {
+
+        ProgressDialog dialog = new ProgressDialog(getContext());
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            dialog.setMessage("Please Wait...");
+            dialog.setCanceledOnTouchOutside(true);
+            dialog.show();
+        }
+
+        @Override
+        protected String doInBackground(String... strings) {
+            String response;
+            try {
+                String address = strings[0];
+                HttpDataHandler httpDataHandler = new HttpDataHandler();
+                String url = String.format("https://maps.googleapis.com/maps/api/geocode/json?address=%s", address);
+                response = httpDataHandler.getHttpData(url);
+                return response;
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+            try {
+                JSONObject jsonObject = new JSONObject(s);
+
+                String lat = ((JSONArray)jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
+                        .getJSONObject("location").get("lat").toString();
+
+                String lng = ((JSONArray)jsonObject.get("results")).getJSONObject(0).getJSONObject("geometry")
+                        .getJSONObject("location").get("lng").toString();
+
+                Intent intent = new Intent(getContext(), MapsActivity.class);
+
+                intent.putExtra("Py", lat);
+                intent.putExtra("Px", lng);
+                startActivity(intent);
+
+                if(dialog.isShowing()) {
+                    dialog.dismiss();
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+
+        }
     }
 }
