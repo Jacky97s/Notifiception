@@ -33,10 +33,6 @@ import java.util.List;
  */
 public class PoliceData extends Fragment {
 
-    public static final int LIST_DATA = 1;
-    private String lat;
-    private String lng;
-
     public PoliceData() {
         // Required empty public constructor
     }
