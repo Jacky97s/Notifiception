@@ -2,8 +2,10 @@ package app.fcu.notifiception;
 
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.os.BatteryManager;
 import android.os.Bundle;
 import android.os.Handler;
@@ -39,14 +41,22 @@ public class BatteryReminder extends Fragment{
         SeekBar seekBar = v.findViewById(R.id.br_seekBar);
         final TextView seekValue = v.findViewById(R.id.seekValue);
 
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("BATTERY_REMINDER", Context.MODE_PRIVATE);
+        int percentage_battery = sharedPreferences.getInt("BATTERY_REMINDER", 20);
+        seekValue.setText(String.valueOf(percentage_battery) + "%");
         setLevel = seekBar.getProgress();
-        seekValue.setText(String.valueOf(setLevel) + "%");
+        seekBar.setProgress(percentage_battery);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seekValue.setText(String.valueOf(progress) + "%");
                 setLevel = progress;
+
+                SharedPreferences sharedPreferences = getActivity().getSharedPreferences("BATTERY_REMINDER", Context.MODE_PRIVATE);
+                SharedPreferences.Editor preEdit = sharedPreferences.edit();
+                preEdit.putInt("BATTERY_REMINDER", progress);
+                preEdit.commit();
             }
 
             @Override
@@ -79,16 +89,16 @@ public class BatteryReminder extends Fragment{
         return v;
     }
 
-    public float batteryLevel() {
-        Intent batteryIntent = getContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-        assert batteryIntent != null;
-        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-
-        if(level == -1 || scale == -1) {
-            return 50.0f;
-        }
-
-        return ((float) level/ (float) scale) * 100.0f;
-    }
+//    public float batteryLevel() {
+//        Intent batteryIntent = getContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
+//        assert batteryIntent != null;
+//        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
+//        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
+//
+//        if(level == -1 || scale == -1) {
+//            return 50.0f;
+//        }
+//
+//        return ((float) level/ (float) scale) * 100.0f;
+//    }
 }
