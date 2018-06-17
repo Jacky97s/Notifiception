@@ -53,7 +53,7 @@ public class Mail extends Fragment {
             String name = etName.getText().toString();
 
             if(msg.isEmpty()) {
-                Toast.makeText(getContext(), "Plaese complete the required field", Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), "Please complete the required field", Toast.LENGTH_LONG).show();
             } else {
                 if(name.isEmpty()) {
                     name = "User";

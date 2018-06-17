@@ -107,7 +107,7 @@
             android:layout_width="match_parent"
             android:layout_height="40dp"
             android:textColor="@color/colorPrimary"
-            android:text="Send Feedback"
+            android:text="@string/send_feedback"
             android:background="@android:color/white"
             android:layout_marginTop="40dp"
             android:elevation="10dp"

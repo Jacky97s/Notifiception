@@ -1,5 +1,6 @@
 package app.fcu.notifiception;
 
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.pg_tos:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilentt());
+                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilent());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Turn Off Silent");
                         drawerLayout.closeDrawers();
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.pg_police:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new PoliceData());
+                        fragmentTransaction.replace(R.id.main_container, new PoliceDataActivity());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Emergency Contact");
                         drawerLayout.closeDrawers();
