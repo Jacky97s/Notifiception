@@ -31,9 +31,9 @@ import java.util.List;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class PoliceData extends Fragment {
+public class PoliceDataActivity extends Fragment {
 
-    public PoliceData() {
+    public PoliceDataActivity() {
         // Required empty public constructor
     }
 
