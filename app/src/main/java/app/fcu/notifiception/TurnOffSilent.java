@@ -5,6 +5,7 @@ import android.app.AlarmManager;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -29,8 +30,8 @@ import static android.content.Context.AUDIO_SERVICE;
  */
 public class TurnOffSilent extends Fragment {
 
-//    NotificationManager modeChange;
-//    Button troff;
+ AudioManager modeChange;
+ Button troff;
 
     public TurnOffSilent() {
         // Required empty public constructor
@@ -42,44 +43,46 @@ public class TurnOffSilent extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_turn_off_silent, container, false);
-//        troff = v.findViewById(R.id.button2);
+        troff = v.findViewById(R.id.button2);
+        modeChange = (AudioManager) v.getContext().getSystemService(Context.AUDIO_SERVICE);
         Spinner spHour = v.findViewById(R.id.durationSpinner);
+
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("TURNOFF_SLIENT", Context.MODE_PRIVATE);
+        int spinnerPosition = sharedPreferences.getInt("TURN_SLIENT", 4);
+        String [] hourForSpinner = getResources().getStringArray(R.array.hourForSpinner);
+
+
         ArrayAdapter<CharSequence> hAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner, R.layout.spinner_text);
         hAdapter.setDropDownViewResource(R.layout.spinner_style);
         spHour.setAdapter(hAdapter);
-//        troff.setOnClickListener(turnOff);
+
+
+
+
+        troff.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                modeChange.setRingerMode(1);
+            }
+        });
 
         return v;
     }
 
-//    View.OnClickListener turnOff  = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View v) {
+//    troff
 //            Toast.makeText(getContext(),
 //                    "There is no email client installed.", Toast.LENGTH_SHORT).show();
-//            modeChange = (NotificationManager) v.getContext().getSystemService(Context.NOTIFICATION_SERVICE);
-//
 //                AudioManager audioManager = (AudioManager) v.getContext().getSystemService(Context.AUDIO_SERVICE);
-//                audioManager.setRingerMode(0);
+//                audioManager.setRingerMode(1);
 
-//            switch (audioManager.getRingerMode()){
-//                case AudioManager.RINGER_MODE_SILENT:
-//                    Log.i("Notiception", "Silent Mode");
-//                    audioManager.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-//                    break;
-//            }
-//        }
-//
-//        private void startActivityForResult(Intent intent) {
-//        }
+    @Override
+    public void onPause() {
+        super.onPause();
 
-//    };
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("TURNOFF_SILENT", Context.MODE_PRIVATE);
+        SharedPreferences.Editor edit = sharedPreferences.edit();
+        edit.putInt("TURNOFF_SILENT",  0);
+        edit.commit();
 
-//        private Context getApplicationContext() {
-//            return null;
-//        }
-//
-//    private AudioManager findViewById(int button2) {
-//        return null;
-//    }
+    }
 }
