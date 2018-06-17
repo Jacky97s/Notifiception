@@ -2,6 +2,7 @@ package app.fcu.notifiception;
 
 
 import android.annotation.SuppressLint;
+import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -27,9 +28,8 @@ import static android.widget.Toast.LENGTH_LONG;
  */
 public class BatteryReminder extends Fragment{
 
-    Handler handler;
-    Runnable runnable;
     int setLevel;
+    private BatteryReminderService service;
 
     public BatteryReminder() {
     }
@@ -70,35 +70,13 @@ public class BatteryReminder extends Fragment{
             }
         });
 
-//        runnable = new Runnable() {
-//            @Override
-//            public void run() {
-//                int level = (int) batteryLevel();
-//                handler.postDelayed(runnable, 1000);
-//                Log.d("Battery", String.valueOf(level));
-//                if (level <= setLevel) {
-//                    Toast hello_ = Toast.makeText(getContext(), "Battery low", Toast.LENGTH_SHORT);
-//                    hello_.show();
-//                }
-//            }
-//        };
-//
-//        handler = new Handler();
-//        handler.postDelayed(runnable, 1000);
+        if( service == null) {
+            Intent intent = new Intent(getActivity(),BatteryReminderService.class);
+            String set_Level = String.valueOf(setLevel);
+            intent.putExtra("SET_LEVEL", set_Level);
+            getActivity().startService(intent);
+        }
 
         return v;
     }
-
-//    public float batteryLevel() {
-//        Intent batteryIntent = getContext().registerReceiver(null, new IntentFilter(Intent.ACTION_BATTERY_CHANGED));
-//        assert batteryIntent != null;
-//        int level = batteryIntent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1);
-//        int scale = batteryIntent.getIntExtra(BatteryManager.EXTRA_SCALE, -1);
-//
-//        if(level == -1 || scale == -1) {
-//            return 50.0f;
-//        }
-//
-//        return ((float) level/ (float) scale) * 100.0f;
-//    }
 }
