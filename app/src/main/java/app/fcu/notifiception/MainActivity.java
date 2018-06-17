@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
 
                     case R.id.pg_tos:
                         fragmentTransaction = getSupportFragmentManager().beginTransaction();
-                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilentt());
+                        fragmentTransaction.replace(R.id.main_container, new TurnOffSilent());
                         fragmentTransaction.commit();
                         getSupportActionBar().setTitle("Turn Off Silent");
                         drawerLayout.closeDrawers();
