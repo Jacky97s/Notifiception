@@ -26,7 +26,7 @@ public class NotificeptionService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-        counter = Integer.valueOf(intent.getStringExtra("Counter"))+5;
+        counter = Integer.valueOf(intent.getStringExtra("Counter"))+1;
         Log.d(TAG, "onStartCommand() executed");
         startTimer();
         return super.onStartCommand(intent, flags, startId);
@@ -47,7 +47,7 @@ public class NotificeptionService extends Service {
                 counter--;
                 Log.d(TAG, "startTimer() executed");
                 Intent i1 = new Intent();
-                i1.setAction("action");
+                i1.setAction("Action");
                 i1.putExtra("Counter", String.valueOf(counter));
                 sendBroadcast(i1);
             }
