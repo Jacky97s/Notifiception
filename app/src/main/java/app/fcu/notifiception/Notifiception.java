@@ -41,6 +41,7 @@ public class Notifiception extends Fragment {
 
     int counter;
     int num;
+    String selectedName;
 
     Spinner spinner;
     Switch msgSwitch;
@@ -53,16 +54,15 @@ public class Notifiception extends Fragment {
         public void onReceive(Context context, Intent intent) {
             Log.d(TAG, "onReceiver() executed");
             num = Integer.valueOf(intent.getStringExtra("Counter"));
-            if (num < counter) {
+            if (num <= 0) {
                 Toast toast = Toast.makeText(getActivity(), "Time to check your new msg", Toast.LENGTH_LONG);
                 toast.show();
-                //times up, stop timer
+                //times up, stop timer & turn off swithch
+                switchState = false;
+                msgSwitch.setChecked(switchState);
+                msgSwitch.setOnCheckedChangeListener(state);
                 Intent stopIntent = new Intent(getActivity(), NotificeptionService.class);
                 getActivity().stopService(stopIntent);
-//                SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
-//                SharedPreferences.Editor prefEdit = pref.edit();
-//                prefEdit.putBoolean("OnOff", false);
-//                prefEdit.commit();
             }
         }
     };
@@ -74,28 +74,52 @@ public class Notifiception extends Fragment {
         View v = inflater.inflate(R.layout.fragment_notifiception, container, false);
         spinner = v.findViewById(R.id.timeSpinner);
         msgSwitch = v.findViewById(R.id.msgSwitch);
+
+        //load
+        SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
+        String Name = pref.getString("SelectedName", "");
+        Log.d(TAG, "get_hour =  " + Name);
+        switchState = pref.getBoolean("OnOff", false);
+        int spinnerPosition = pref.getInt("Counter", -1);
+        if(spinnerPosition != -1){
+            spinner.setSelection(spinnerPosition);
+        }
+        Log.d(TAG, "spinnerPos: " + spinner.getSelectedItemPosition());
+
         ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner,
                 R.layout.spinner_text);
         nAdapter.setDropDownViewResource(R.layout.spinner_style);
         spinner.setAdapter(nAdapter);
         spinner.setSelection(spinner.getSelectedItemPosition(), true);
-
-        //load xml
-        SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
-        int spinnerPosition = pref.getInt("Counter", -1);
-        if(spinnerPosition != -1){
-            spinner.setSelection(spinnerPosition);
-        }
-//        spinner.setSelection(pref.getInt("position",-1));
-        switchState = pref.getBoolean("OnOff", false);
-        Log.d(TAG, "spinnerPos: " + spinner.getSelectedItemPosition());
+        spinner.setOnItemSelectedListener(spinnerState);
 
         msgSwitch.setOnCheckedChangeListener(state);
         msgSwitch.setChecked(switchState);
-        counter = spinner.getSelectedItemPosition();
 
         return v;
+
     }
+
+    AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelectedListener() {
+        @Override
+        public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            Log.d(TAG, "onItemSelected() executed ");
+            counter = spinner.getSelectedItemPosition();
+            SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
+            SharedPreferences.Editor prefEdit = pref.edit();
+
+            selectedName = adapterView.getItemAtPosition(counter).toString();
+            prefEdit.putInt("Counter", counter);
+            prefEdit.putString("SelectedName", selectedName);
+            Log.d(TAG, "Selected_hour =  " + selectedName);
+            prefEdit.commit();
+        }
+
+        @Override
+        public void onNothingSelected(AdapterView<?> adapterView) {
+
+        }
+    };
 
     CompoundButton.OnCheckedChangeListener state = new CompoundButton.OnCheckedChangeListener() {
         @Override
@@ -106,7 +130,7 @@ public class Notifiception extends Fragment {
                 //save
                 SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefEdit = pref.edit();
-                prefEdit.putInt("Counter", counter);
+//                prefEdit.putInt("Counter", counter);
                 prefEdit.putBoolean("OnOff", true);
                 prefEdit.commit();
 
@@ -122,7 +146,7 @@ public class Notifiception extends Fragment {
                 //save
                 SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefEdit = pref.edit();
-                prefEdit.putInt("Counter", counter);
+//                prefEdit.putInt("Counter", counter);
                 prefEdit.putBoolean("OnOff", false);
                 prefEdit.commit();
 
@@ -133,4 +157,6 @@ public class Notifiception extends Fragment {
 
         }
     };
+
+
 }

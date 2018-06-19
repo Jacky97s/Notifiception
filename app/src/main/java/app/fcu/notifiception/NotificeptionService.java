@@ -27,6 +27,8 @@ public class NotificeptionService extends Service {
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         counter = Integer.valueOf(intent.getStringExtra("Counter"))+1;
+        //sec to hour (3600 sec)
+        counter = counter*60;
         Log.d(TAG, "onStartCommand() executed");
         startTimer();
         return super.onStartCommand(intent, flags, startId);
@@ -52,7 +54,7 @@ public class NotificeptionService extends Service {
                 sendBroadcast(i1);
             }
         };
-        timer.schedule(task, 0, 1000);
+        timer.schedule(task, 1000, 1000);
     }
 
     public void stopTimer() {
