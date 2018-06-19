@@ -41,6 +41,8 @@ public class BatteryReminder extends Fragment{
         SeekBar seekBar = v.findViewById(R.id.br_seekBar);
         final TextView seekValue = v.findViewById(R.id.seekValue);
 
+
+        //load
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("BATTERY_REMINDER", Context.MODE_PRIVATE);
         int percentage_battery = sharedPreferences.getInt("BATTERY_REMINDER", 20);
         seekValue.setText(String.valueOf(percentage_battery) + "%");
@@ -53,10 +55,23 @@ public class BatteryReminder extends Fragment{
                 seekValue.setText(String.valueOf(progress) + "%");
                 setLevel = progress;
 
+                Intent intent = new Intent(getActivity(),BatteryReminderService.class);
+                String set_Level = String.valueOf(setLevel);
+                intent.putExtra("SET_LEVEL", set_Level);
+
+                if( service == null) {
+                    getActivity().startService(intent);
+                } else {
+                    getActivity().stopService(intent);
+                    getActivity().startService(intent);
+                }
+
+
+                //save
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("BATTERY_REMINDER", Context.MODE_PRIVATE);
                 SharedPreferences.Editor preEdit = sharedPreferences.edit();
                 preEdit.putInt("BATTERY_REMINDER", progress);
-                preEdit.commit();
+                preEdit.apply();
             }
 
             @Override
@@ -69,13 +84,6 @@ public class BatteryReminder extends Fragment{
 
             }
         });
-
-        if( service == null) {
-            Intent intent = new Intent(getActivity(),BatteryReminderService.class);
-            String set_Level = String.valueOf(setLevel);
-            intent.putExtra("SET_LEVEL", set_Level);
-            getActivity().startService(intent);
-        }
 
         return v;
     }
