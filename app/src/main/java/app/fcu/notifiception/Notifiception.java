@@ -81,17 +81,16 @@ public class Notifiception extends Fragment {
         Log.d(TAG, "get_hour =  " + Name);
         switchState = pref.getBoolean("OnOff", false);
         int spinnerPosition = pref.getInt("Counter", -1);
-        if(spinnerPosition != -1){
-            spinner.setSelection(spinnerPosition);
-        }
-        Log.d(TAG, "spinnerPos: " + spinner.getSelectedItemPosition());
 
         ArrayAdapter<CharSequence> nAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.hourForSpinner,
                 R.layout.spinner_text);
         nAdapter.setDropDownViewResource(R.layout.spinner_style);
         spinner.setAdapter(nAdapter);
-        spinner.setSelection(spinner.getSelectedItemPosition(), true);
         spinner.setOnItemSelectedListener(spinnerState);
+        if(spinnerPosition != -1){
+            spinner.setSelection(spinnerPosition);
+        }
+        Log.d(TAG, "spinnerPos: " + spinner.getSelectedItemPosition());
 
         msgSwitch.setOnCheckedChangeListener(state);
         msgSwitch.setChecked(switchState);
