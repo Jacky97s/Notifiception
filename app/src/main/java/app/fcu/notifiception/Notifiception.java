@@ -52,8 +52,8 @@ public class Notifiception extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "onReceiver() executed");
-            num = Integer.valueOf(intent.getStringExtra("Counter"));
+        Log.d(TAG, "onReceiver() executed");
+        num = Integer.valueOf(intent.getStringExtra("Counter"));
             if (num <= 0) {
                 Toast toast = Toast.makeText(getActivity(), "Time to check your new msg", Toast.LENGTH_LONG);
                 toast.show();
@@ -96,7 +96,6 @@ public class Notifiception extends Fragment {
         msgSwitch.setChecked(switchState);
 
         return v;
-
     }
 
     AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelectedListener() {
@@ -111,7 +110,7 @@ public class Notifiception extends Fragment {
             prefEdit.putInt("Counter", counter);
             prefEdit.putString("SelectedName", selectedName);
             Log.d(TAG, "Selected_hour =  " + selectedName);
-            prefEdit.commit();
+            prefEdit.apply();
         }
 
         @Override
@@ -123,37 +122,36 @@ public class Notifiception extends Fragment {
     CompoundButton.OnCheckedChangeListener state = new CompoundButton.OnCheckedChangeListener() {
         @Override
         public void onCheckedChanged(CompoundButton compoundButton, boolean check) {
-            Log.d(TAG, "onCheckedChanged() executed");
-            if (check) {
-                Log.d(TAG, "onCheckedChanged: TRUE");
-                //save
-                SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
-                SharedPreferences.Editor prefEdit = pref.edit();
-//                prefEdit.putInt("Counter", counter);
-                prefEdit.putBoolean("OnOff", true);
-                prefEdit.commit();
+        Log.d(TAG, "onCheckedChanged() executed");
+        if (check) {
+            Log.d(TAG, "onCheckedChanged: TRUE");
+            //save
+            SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
+            SharedPreferences.Editor prefEdit = pref.edit();
+    //                prefEdit.putInt("Counter", counter);
+            prefEdit.putBoolean("OnOff", true);
+            prefEdit.apply();
 
-                //start timer
-                getActivity().registerReceiver(receiver, new IntentFilter("Action"));
-                Intent startIntent = new Intent(getActivity(), NotificeptionService.class);
-                startIntent.putExtra("Counter", String.valueOf(counter));
-                getActivity().startService(startIntent);
+            //start timer
+            getActivity().registerReceiver(receiver, new IntentFilter("Action"));
+            Intent startIntent = new Intent(getActivity(), NotificeptionService.class);
+            startIntent.putExtra("Counter", String.valueOf(counter));
+            getActivity().startService(startIntent);
 
 
-            } else {
-                Log.d(TAG, "onCheckedChanged: FALSE");
-                //save
-                SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
-                SharedPreferences.Editor prefEdit = pref.edit();
-//                prefEdit.putInt("Counter", counter);
-                prefEdit.putBoolean("OnOff", false);
-                prefEdit.commit();
+        } else {
+            Log.d(TAG, "onCheckedChanged: FALSE");
+            //save
+            SharedPreferences pref = getActivity().getSharedPreferences("Notifiception", Context.MODE_PRIVATE);
+            SharedPreferences.Editor prefEdit = pref.edit();
+    //                prefEdit.putInt("Counter", counter);
+            prefEdit.putBoolean("OnOff", false);
+            prefEdit.apply();
 
-                //stop timer
-                Intent stopIntent = new Intent(getActivity(), NotificeptionService.class);
-                getActivity().stopService(stopIntent);
-            }
-
+            //stop timer
+            Intent stopIntent = new Intent(getActivity(), NotificeptionService.class);
+            getActivity().stopService(stopIntent);
+        }
         }
     };
 
