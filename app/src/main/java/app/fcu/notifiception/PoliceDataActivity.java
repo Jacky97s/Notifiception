@@ -1,6 +1,7 @@
 package app.fcu.notifiception;
 
 
+import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.AsyncTask;
@@ -26,6 +27,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 
 /**
@@ -37,13 +39,14 @@ public class PoliceDataActivity extends Fragment {
         // Required empty public constructor
     }
 
-    private void getDataFromFirebase() {
+    public void getDataFromFirebase() {
+        final List<PoliceStationData> lsData = new ArrayList<>();
+
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference databaseReference = firebaseDatabase.getReference();
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(final DataSnapshot dataSnapshot) {
-                List<PoliceStationData> lsData = new ArrayList<>();
                 for (DataSnapshot ds : dataSnapshot.getChildren()) {
                     DataSnapshot dsName = ds.child("Name");
                     DataSnapshot dsAddress = ds.child("Address");
@@ -52,22 +55,18 @@ public class PoliceDataActivity extends Fragment {
                     String dName = String.valueOf(dsName.getValue());
                     String dAddress = String.valueOf(dsAddress.getValue());
                     String dContact = String.valueOf(dsContact.getValue());
-
                     PoliceStationData psd = new PoliceStationData(dName, dAddress, dContact);
                     lsData.add(psd);
-                    Log.v("PSD", dName + ";" + dAddress + ";" + dContact);
-
-                    List<PoliceStationData> psdlist = lsData;
-                    PoliceArrayAdapter adapter = new PoliceArrayAdapter(getActivity(), psdlist);
-                    ListView lv = getView().findViewById(R.id.listview_psd);
-                    lv.setAdapter(adapter);
-                    lv.setOnItemClickListener(itemClick);
                 }
+                PoliceArrayAdapter adapter = new PoliceArrayAdapter(getActivity(), lsData);
+                ListView lv = Objects.requireNonNull(getView()).findViewById(R.id.listview_psd);
+                lv.setAdapter(adapter);
+                lv.setOnItemClickListener(itemClick);
             }
 
             @Override
             public void onCancelled(DatabaseError databaseError) {
-                Log.v("Hotel_Cancel", databaseError.getMessage());
+                Log.v("Police Cancel", databaseError.getMessage());
             }
         });
     }
@@ -89,6 +88,7 @@ public class PoliceDataActivity extends Fragment {
         }
     };
 
+    @SuppressLint("StaticFieldLeak")
     private class getCoordinates extends AsyncTask<String, Void, String> {
 
         ProgressDialog dialog = new ProgressDialog(getContext());
