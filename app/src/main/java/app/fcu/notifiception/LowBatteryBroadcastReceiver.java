@@ -18,7 +18,7 @@ public class LowBatteryBroadcastReceiver extends BroadcastReceiver {
         newintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newintent, 0);
 
-        Notification notify = newNotification(context, pendingIntent, "Your Battery is Under " + percentage + "%", percentage);
+        Notification notify = newNotification(context, pendingIntent, "Battery is Low!", percentage);
         notify.flags = Notification.FLAG_AUTO_CANCEL;
 
         NotificationManager notificationManager =
@@ -28,10 +28,10 @@ public class LowBatteryBroadcastReceiver extends BroadcastReceiver {
         notificationManager.notify(id++, notify);
     }
 
-    private Notification newNotification(Context context, PendingIntent pendingIntent, String title, String in_name) {
+    private Notification newNotification(Context context, PendingIntent pendingIntent, String title, String percentage) {
         Notification.Builder builder = new Notification.Builder(context);
         builder.setContentTitle(title);
-        builder.setContentText("Low Battery!");
+        builder.setContentText(Integer.valueOf(percentage) + "% remaining");
         builder.setSmallIcon(R.mipmap.ic_battery_unknown_black_24dp);
         builder.setContentIntent(pendingIntent);
         builder.setTicker("Low Battery Warning");
