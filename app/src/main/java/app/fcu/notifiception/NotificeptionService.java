@@ -28,7 +28,7 @@ public class NotificeptionService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
         counter = Integer.valueOf(intent.getStringExtra("Counter"))+1;
         //sec to hour (3600 sec)
-        counter = counter*60;
+        counter = counter*10;
         Log.d(TAG, "onStartCommand() executed");
         startTimer();
         return super.onStartCommand(intent, flags, startId);
