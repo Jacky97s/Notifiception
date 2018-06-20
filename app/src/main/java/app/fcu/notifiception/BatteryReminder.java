@@ -80,7 +80,7 @@ public class BatteryReminder extends Fragment{
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("REMINDER", Context.MODE_PRIVATE);
                 SharedPreferences.Editor preEdit = sharedPreferences.edit();
                 preEdit.putInt("BATTERY_REMINDER", progress);
-                preEdit.commit();
+                preEdit.apply();
             }
 
             @Override
@@ -93,7 +93,6 @@ public class BatteryReminder extends Fragment{
 
             }
         });
-
         return v;
     }
 }

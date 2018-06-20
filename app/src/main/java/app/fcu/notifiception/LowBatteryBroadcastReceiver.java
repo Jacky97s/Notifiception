@@ -16,7 +16,7 @@ public class LowBatteryBroadcastReceiver extends BroadcastReceiver {
 
         Intent newintent = new Intent();
         newintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newintent, 0);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         Notification notify = newNotification(context, pendingIntent, "Battery is Low!", percentage);
         notify.flags = Notification.FLAG_AUTO_CANCEL;
