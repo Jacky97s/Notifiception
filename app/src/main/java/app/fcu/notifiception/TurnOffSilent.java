@@ -80,7 +80,6 @@ public class TurnOffSilent extends Fragment {
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_turn_off_silent, container, false);
         spHour = v.findViewById(R.id.durationSpinner);
-        troff = v.findViewById(R.id.button2);
         swMsg = v.findViewById(R.id.switch1);
 
 
@@ -102,13 +101,6 @@ public class TurnOffSilent extends Fragment {
 
         swMsg.setOnCheckedChangeListener(state);
         swMsg.setChecked(onOff);
-
-        troff.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                modeChange.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
-            }
-        });
 
         return v;
     }
