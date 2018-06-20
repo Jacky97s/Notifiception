@@ -28,6 +28,8 @@
             </intent-filter>
         </activity>
         <service android:name="app.fcu.notifiception.BatteryReminderService"/>
+        <service android:name=".NotificeptionService"/>
+        <service android:name=".TurnOffSilentService"/>
         <receiver android:name=".LowBatteryBroadcastReceiver">
             <intent-filter>
                 <action android:name="br.Notification" />
@@ -49,7 +51,7 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps"/>
 
-        <service android:name=".NotificeptionService"/>
+
     </application>
 
 </manifest>
