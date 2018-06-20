@@ -24,6 +24,7 @@
                 android:layout_height="100dp"
                 android:layout_weight="0.25"
                 android:src="@mipmap/ic_launcher"
+                android:padding="10dp"
                 android:layout_gravity="start"/>
 
             <LinearLayout
