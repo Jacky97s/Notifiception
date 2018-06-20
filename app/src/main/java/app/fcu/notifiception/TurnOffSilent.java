@@ -57,14 +57,14 @@ public class TurnOffSilent extends Fragment {
 
         @Override
         public void onReceive(Context context, Intent intent) {
-            Log.d(TAG, "onReceiver() executed");
             modeChange = (AudioManager)getContext().getSystemService(Context.AUDIO_SERVICE);
+            Log.d(TAG, "onReceiver() executed");
             time = Integer.valueOf(intent.getStringExtra("Counter"));
             if (time <= 0) {
-                modeChange.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                 Toast toast = Toast.makeText(getActivity(), "Silent mode has turn off", Toast.LENGTH_LONG);
                 toast.show();
-                //times up, stop timer & turn off switch
+                modeChange.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
+                //times up, stop timer & turn off
                 onOff = false;
                 swMsg.setChecked(onOff);
                 swMsg.setOnCheckedChangeListener(state);
@@ -82,7 +82,7 @@ public class TurnOffSilent extends Fragment {
         spHour = v.findViewById(R.id.durationSpinner);
         troff = v.findViewById(R.id.button2);
         swMsg = v.findViewById(R.id.switch1);
-        modeChange = (AudioManager)v.getContext().getSystemService(Context.AUDIO_SERVICE);
+
 
         SharedPreferences sharedPreferences = getActivity().getSharedPreferences("TURNOFF_SLIENT", Context.MODE_PRIVATE);
         String Name = sharedPreferences.getString("SelectedName", "");
@@ -153,7 +153,7 @@ AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelected
 
                 //start timer
                 getActivity().registerReceiver(receiver, new IntentFilter("Action"));
-                Intent startIntent = new Intent(getActivity(), NotificeptionService.class);
+                Intent startIntent = new Intent(getActivity(), TurnOffSilentService.class);
                 startIntent.putExtra("Counter", String.valueOf(time));
                 getActivity().startService(startIntent);
 
@@ -167,7 +167,7 @@ AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelected
                 prefEdit.commit();
 
                 //stop timer
-                Intent stopIntent = new Intent(getActivity(), NotificeptionService.class);
+                Intent stopIntent = new Intent(getActivity(), TurnOffSilentService.class);
                 getActivity().stopService(stopIntent);
             }
 
