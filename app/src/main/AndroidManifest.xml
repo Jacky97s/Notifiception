@@ -28,7 +28,11 @@
             </intent-filter>
         </activity>
         <service android:name="app.fcu.notifiception.BatteryReminderService"/>
-
+        <receiver android:name=".LowBatteryBroadcastReceiver">
+            <intent-filter>
+                <action android:name="br.Notification" />
+            </intent-filter>
+        </receiver>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").

@@ -41,14 +41,6 @@ public class BatteryReminder extends Fragment{
         SeekBar seekBar = v.findViewById(R.id.br_seekBar);
         final TextView seekValue = v.findViewById(R.id.seekValue);
 
-
-        //load
-        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("REMINDER", Context.MODE_PRIVATE);
-        int percentage_battery = sharedPreferences.getInt("BATTERY_REMINDER", 20);
-        seekValue.setText(String.valueOf(percentage_battery) + "%");
-        setLevel = seekBar.getProgress();
-        seekBar.setProgress(percentage_battery);
-
         Intent intent = new Intent(getActivity(),BatteryReminderService.class);
         String set_Level = String.valueOf(setLevel);
         intent.putExtra("SET_LEVEL", set_Level);
@@ -60,11 +52,29 @@ public class BatteryReminder extends Fragment{
             getActivity().startService(intent);
         }
 
+        //load
+        SharedPreferences sharedPreferences = getActivity().getSharedPreferences("REMINDER", Context.MODE_PRIVATE);
+        int percentage_battery = sharedPreferences.getInt("BATTERY_REMINDER", 20);
+        seekValue.setText(String.valueOf(percentage_battery) + "%");
+        setLevel = seekBar.getProgress();
+        seekBar.setProgress(percentage_battery);
+
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 seekValue.setText(String.valueOf(progress) + "%");
                 setLevel = progress;
+
+                Intent intent = new Intent(getActivity(),BatteryReminderService.class);
+                String set_Level = String.valueOf(setLevel);
+                intent.putExtra("SET_LEVEL", set_Level);
+
+                if( service == null) {
+                    getActivity().startService(intent);
+                } else {
+                    getActivity().stopService(intent);
+                    getActivity().startService(intent);
+                }
 
                 //save
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("REMINDER", Context.MODE_PRIVATE);

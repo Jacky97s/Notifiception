@@ -16,6 +16,7 @@ public class BatteryReminderService extends Service {
     String set_level;
     int level;
     int last_level;
+    int flag;
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
@@ -25,6 +26,7 @@ public class BatteryReminderService extends Service {
         // register our receiver
         this.registerReceiver(this.batteryChangeReceiver, battChangeFilter);
         last_level = 100;
+        flag = 0;
         return super.onStartCommand(intent, flags, startId);
     }
 
@@ -44,14 +46,21 @@ public class BatteryReminderService extends Service {
                 BatteryManager.EXTRA_SCALE, -1);
         final int percentage = (int) Math.round((currLevel * 100.0) / maxLevel);
 
-        Log.d("MySerive", "current battery level: " + percentage);
+        Log.d("MyService", "current battery level: " + percentage);
         level = Integer.valueOf(set_level);
         // compare level
         if (percentage <= level) {
-            Log.d("MySerive", "battery reminder" + set_level);
-            if(percentage < last_level)
-            Toast.makeText(getBaseContext(), "Hehehe", Toast.LENGTH_SHORT).show();
+            Log.d("MyService", "battery reminder" + set_level);
+            if((percentage < last_level) && (flag == 0)) {
+                flag = 1;
+                Intent intent = new Intent();
+                intent.setAction("br.Notification");
+                intent.putExtra("PERCENTAGE", set_level);
+                sendBroadcast(intent);
+            }
             last_level = percentage;
+        } else {
+            flag = 0;
         }
     }
 
