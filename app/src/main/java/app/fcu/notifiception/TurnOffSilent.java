@@ -61,8 +61,8 @@ public class TurnOffSilent extends Fragment {
             Log.d(TAG, "onReceiver() executed");
             time = Integer.valueOf(intent.getStringExtra("Counter"));
             if (time <= 0) {
-                Toast toast = Toast.makeText(getActivity(), "Silent mode has turn off", Toast.LENGTH_LONG);
-                toast.show();
+                intent.setAction("TOS_Notification");
+                context.sendBroadcast(intent);
                 modeChange.setRingerMode(AudioManager.RINGER_MODE_NORMAL);
                 //times up, stop timer & turn off
                 onOff = false;
@@ -122,7 +122,7 @@ AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelected
         prefEdit.putInt("Counter", time);
         prefEdit.putString("SelectedName", selectedHour);
         Log.d(TAG, "Selected_hour =  " + selectedHour);
-        prefEdit.commit();
+        prefEdit.apply();
     }
 
     @Override
@@ -141,7 +141,7 @@ AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelected
                 SharedPreferences pref = getActivity().getSharedPreferences("TURNOFF_SLIENT", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefEdit = pref.edit();
                 prefEdit.putBoolean("OnOff", true);
-                prefEdit.commit();
+                prefEdit.apply();
 
                 //start timer
                 getActivity().registerReceiver(receiver, new IntentFilter("Action"));
@@ -156,7 +156,7 @@ AdapterView.OnItemSelectedListener spinnerState = new AdapterView.OnItemSelected
                 SharedPreferences pref = getActivity().getSharedPreferences("TURNOFF_SLIENT", Context.MODE_PRIVATE);
                 SharedPreferences.Editor prefEdit = pref.edit();
                 prefEdit.putBoolean("OnOff", false);
-                prefEdit.commit();
+                prefEdit.apply();
 
                 //stop timer
                 Intent stopIntent = new Intent(getActivity(), TurnOffSilentService.class);
