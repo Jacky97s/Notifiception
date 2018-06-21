@@ -9,7 +9,7 @@ import android.content.Intent;
 
 public class TurnOffSilentBroadcastReceiver extends BroadcastReceiver {
 
-    static int id = 3000;
+    static int id = 12000;
     @Override
     public void onReceive(Context context, Intent intent) {
 
