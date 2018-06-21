@@ -58,6 +58,7 @@ public class BatteryReminderService extends Service {
                 intent.putExtra("PERCENTAGE", set_level);
                 sendBroadcast(intent);
             }
+
             last_level = percentage;
         } else {
             flag = 0;

@@ -75,7 +75,6 @@ public class BatteryReminder extends Fragment{
                     getActivity().stopService(intent);
                     getActivity().startService(intent);
                 }
-
                 //save
                 SharedPreferences sharedPreferences = getActivity().getSharedPreferences("REMINDER", Context.MODE_PRIVATE);
                 SharedPreferences.Editor preEdit = sharedPreferences.edit();

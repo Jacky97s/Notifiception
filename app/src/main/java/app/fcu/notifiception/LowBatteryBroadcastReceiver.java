@@ -12,6 +12,7 @@ public class LowBatteryBroadcastReceiver extends BroadcastReceiver {
     static int id = 7000;
     @Override
     public void onReceive(Context context, Intent intent) {
+
         String percentage = intent.getStringExtra("PERCENTAGE");
 
         Intent newintent = new Intent();
