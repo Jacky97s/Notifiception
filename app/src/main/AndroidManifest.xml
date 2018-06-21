@@ -30,9 +30,20 @@
         <service android:name="app.fcu.notifiception.BatteryReminderService"/>
         <service android:name=".NotificeptionService"/>
         <service android:name=".TurnOffSilentService"/>
+
         <receiver android:name=".LowBatteryBroadcastReceiver">
             <intent-filter>
                 <action android:name="br.Notification" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".NotificeptionReceiver">
+            <intent-filter>
+                <action android:name="NOTI_Notification" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".TurnOffSilentBroadcastReceiver">
+            <intent-filter>
+                <action android:name="TOS_Notification" />
             </intent-filter>
         </receiver>
         <!--
