@@ -8,7 +8,7 @@ import android.content.Context;
 import android.content.Intent;
 
 public class NotificeptionReceiver extends BroadcastReceiver {
-    static int id = 7000;
+    static int id = 1668;
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -16,7 +16,7 @@ public class NotificeptionReceiver extends BroadcastReceiver {
         newintent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, newintent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        Notification notify = newNotification(context, pendingIntent, "Check MSG");
+        Notification notify = newNotification(context, pendingIntent, "Time to check your new MSG");
         notify.flags = Notification.FLAG_AUTO_CANCEL;
 
         NotificationManager notificationManager =
@@ -29,10 +29,10 @@ public class NotificeptionReceiver extends BroadcastReceiver {
     private Notification newNotification(Context context, PendingIntent pendingIntent, String title) {
         Notification.Builder builder = new Notification.Builder(context);
         builder.setContentTitle(title);
-        builder.setContentText("YOYOYO MSG");
-        builder.setSmallIcon(R.mipmap.ic_attach_money_black_24dp);
+        builder.setContentText("Check new MSG");
+        builder.setSmallIcon(R.mipmap.ic_message_black_24dp);
         builder.setContentIntent(pendingIntent);
-        builder.setTicker("Check your new MSG");
+        builder.setTicker("MSG");
         builder.setWhen(System.currentTimeMillis());
         return builder.build();
     }
