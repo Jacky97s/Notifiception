@@ -60,6 +60,7 @@ public class NotificeptionService extends Service {
     public void stopTimer() {
         Log.d(TAG, "stopTimer() executed");
         timer.cancel();
+
     }
 
     @Override

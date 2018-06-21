@@ -55,8 +55,8 @@ public class Notifiception extends Fragment {
         Log.d(TAG, "onReceiver() executed");
         num = Integer.valueOf(intent.getStringExtra("Counter"));
             if (num <= 0) {
-                Toast toast = Toast.makeText(getActivity(), "Time to check your new msg", Toast.LENGTH_LONG);
-                toast.show();
+                intent.setAction("NOTI_Notification");
+                context.sendBroadcast(intent);
                 //times up, stop timer & turn off swithch
                 switchState = false;
                 msgSwitch.setChecked(switchState);
